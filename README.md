@@ -10,12 +10,21 @@ Create a django View that inherits from  **ServerSideDatatableView**.
 Example (backend):
 
 ```python
+# views.py
+
 from django_serverside_datatble.views import ServerSideDatatableView
 
 
 class ItemListView(ServerSideDatatableView):
 	queryset = models.Item.objects.all()
 	columns = ['name', 'code', 'description']
+
+
+# urls.py
+# add the following line to urlpatterns
+
+path('data/', views.ItemListView.as_view()), 
+
 ```
 
 Example (frontend):
@@ -47,12 +56,12 @@ Example (frontend):
 			$(document).ready(function () {
 				$('#items-table').dataTable({
 					serverSide: true,
-					sAjaxSource: "/data/",
-                    columns: [
-                        {name: "name", data: 0},
-                        {name: "code", data: 1},
-                        {name: "description", data: 2},
-                    ],
+					sAjaxSource: "/data/",  // new url
+                                        columns: [
+                                            {name: "name", data: 0},
+                                            {name: "code", data: 1},
+                                            {name: "description", data: 2},
+                                        ],
 				});
 			});
 		</script>
