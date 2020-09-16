@@ -12,7 +12,7 @@ Example (backend):
 ```python
 # views.py
 
-from django_serverside_datatble.views import ServerSideDatatableView
+from django_serverside_datatable.views import ServerSideDatatableView
 
 
 class ItemListView(ServerSideDatatableView):
