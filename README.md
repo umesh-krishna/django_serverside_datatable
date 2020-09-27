@@ -4,6 +4,13 @@ This is a simple package that let you use Server-side Datatable in your Django P
 
 Supports datatable features such as Pagination, Search, etc...
 
+## Install
+
+```
+pip install django-serverside-datatable
+```
+
+
 ## How to use
 
 Create a django View that inherits from  **ServerSideDatatableView**.
