@@ -1,6 +1,6 @@
 from django.views import View
 from django.http import JsonResponse
-from django_serverside_datatable.django_serverside_datatable import datatable
+from django_serverside_datatable import datatable
 
 
 class ServerSideDatatableView(View):
