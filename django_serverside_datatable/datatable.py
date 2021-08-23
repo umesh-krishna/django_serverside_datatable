@@ -54,7 +54,7 @@ class DataTablesServer(object):
             len_data = data.count()
             data = list(data[pages.start:pages.length].values(*self.columns))
         else:
-            data = qs.order_by('id', '%s' % sorting).values(*self.columns)
+            data = qs.order_by('%s' % sorting).values(*self.columns)
             len_data = data.count()
             _index = int(pages.start)
             data = data[_index:_index + (pages.length - pages.start)]
