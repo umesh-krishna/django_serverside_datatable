@@ -46,25 +46,20 @@ class DataTablesServer(object):
         # the document field you chose to sort
         sorting = self.sorting()
         # custom filter
-        try:
-            qs = self.qs
+        qs = self.qs
 
-            if _filter:
-                data = qs.filter(
-                    reduce(operator.or_, _filter)).order_by('%s' % sorting)
-                len_data = data.count()
-                data = list(data[pages.start:pages.length].values(*self.columns))
-            else:
-                data = qs.order_by('id', '%s' % sorting).values(*self.columns)
-                len_data = data.count()
-                _index = int(pages.start)
-                data = data[_index:_index + (pages.length - pages.start)]
+        if _filter:
+            data = qs.filter(
+                reduce(operator.or_, _filter)).order_by('%s' % sorting)
+            len_data = data.count()
+            data = list(data[pages.start:pages.length].values(*self.columns))
+        else:
+            data = qs.order_by('id', '%s' % sorting).values(*self.columns)
+            len_data = data.count()
+            _index = int(pages.start)
+            data = data[_index:_index + (pages.length - pages.start)]
 
-            self.result_data = list(data)
-
-        except Exception as e:
-            self.result_data = []
-            len_data = 0
+        self.result_data = list(data)
 
         # length of filtered set
         if _filter:
