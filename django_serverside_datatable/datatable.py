@@ -24,7 +24,7 @@ class DataTablesServer(object):
     def output_result(self):
         output = dict()
         output['sEcho'] = str(int(self.request_values['sEcho']))
-        output['iTotalRecords'] = str(self.cardinality)
+        output['iTotalRecords'] = str(self.qs.count())
         output['iTotalDisplayRecords'] = str(self.cardinality_filtered)
         data_rows = []
 
