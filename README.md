@@ -42,7 +42,7 @@ Example (frontend):
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 	</head>
 	<body>
 		<h1>Items</h1>
@@ -58,13 +58,13 @@ Example (frontend):
 			<tbody></tbody>
 		</table>
 
-		<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<script language="javascript">
 			$(document).ready(function () {
 				$('#items-table').dataTable({
 					serverSide: true,
-					sAjaxSource: "/data/",  // new url
+					sAjaxSource: "localhost:8000/data/",  // new url
                                         columns: [
                                             {name: "name", data: 0},
                                             {name: "code", data: 1},
