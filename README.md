@@ -64,7 +64,7 @@ Example (frontend):
 			$(document).ready(function () {
 				$('#items-table').dataTable({
 					serverSide: true,
-					sAjaxSource: "localhost:8000/data/",  // new url
+					sAjaxSource: "http://127.0.0.1:8000/data/",  // new url
                                         columns: [
                                             {name: "name", data: 0},
                                             {name: "code", data: 1},
