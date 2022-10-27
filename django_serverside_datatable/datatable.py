@@ -42,15 +42,19 @@ class DataTablesServer(object):
         # pages has 'start' and 'length' attributes
         pages = self.paging()
         # the term you entered into the datatable search
-        _filter = self.filtering()
+        _filter, op = self.filtering()
         # the document field you chose to sort
         sorting = self.sorting()
         # custom filter
         qs = self.qs
 
         if _filter:
-            data = qs.filter(
-                reduce(operator.or_, _filter)).order_by('%s' % sorting)
+            if op == "or":
+                data = qs.filter(
+                    reduce(operator.or_, _filter)).order_by('%s' % sorting)
+            else:
+                data = qs.filter(
+                    reduce(operator.and_, _filter)).order_by('%s' % sorting)
             len_data = data.count()
             data = list(data[pages.start:pages.length].values(*self.columns))
         else:
@@ -71,13 +75,18 @@ class DataTablesServer(object):
     def filtering(self):
         # build your filter spec
         or_filter = []
-
+        op = ""
         if (self.request_values.get('sSearch')) and (self.request_values['sSearch'] != ""):
+            op = "or"
             for i in range(len(self.columns)):
                 or_filter.append((self.columns[i]+'__icontains', self.request_values['sSearch']))
-
+        else:
+            op = "and"
+            for i in range(len(self.columns)):
+                if (self.request_values.get(f'sSearch_{i}')) and (self.request_values[f'sSearch_{i}'] != ""):
+                    or_filter.append((self.columns[i]+'__icontains', self.request_values[f'sSearch_{i}']))
         q_list = [Q(x) for x in or_filter]
-        return q_list
+        return q_list, op
 
     def sorting(self):
 
