@@ -74,7 +74,10 @@ class DataTablesServer(object):
 
         if (self.request_values.get('sSearch')) and (self.request_values['sSearch'] != ""):
             for i in range(len(self.columns)):
-                or_filter.append((self.columns[i]+'__icontains', self.request_values['sSearch']))
+                if self.request_values['bSearchable_%d' % i] == 'true':
+                    or_filter.append(
+                        Q(**{'%s__icontains' % self.columns[i]: self.request_values['sSearch']}))
+
 
         q_list = [Q(x) for x in or_filter]
         return q_list
