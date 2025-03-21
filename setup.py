@@ -19,7 +19,7 @@ setuptools.setup(
       license="MIT",
       author="Umesh Krishna",
       author_email='umesh_krishna@outlook.com',
-      install_requires=['Django>=1.8'],
+      install_requires=['Django>=1.11'],
       packages=setuptools.find_packages(),
       classifiers=[
         "Programming Language :: Python :: 3",

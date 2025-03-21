@@ -1,8 +1,8 @@
 import pytest
-
 from django import get_version
 from django.test import override_settings
 from django_serverside_datatable.views import ServerSideDatatableView
+from django.urls import reverse
 
 DJANGO_VERSION = get_version()
 urlpatterns = None
@@ -22,10 +22,6 @@ else:
         url('test-view/', ServerSideDatatableTestView.as_view(), name='test-view')
     ]
 
-if DJANGO_VERSION <= '1.8':
-    from django.core.urlresolvers import reverse
-else:
-    from django.urls import reverse
 
 @pytest.mark.django_db
 def test_serverside_datatable_view(client, sample_queryset):
